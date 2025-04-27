@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+@import "tailwindcss" source(none);
+
+@source "./";
+
+@theme {
+  --font-quicksand: "Quicksand", serif;
+  --animate-wavey: wavey 1000ms linear infinite;
+  --animation-delay-100ms: 100ms;
+  --animation-delay-200ms: 200ms;
+  --animation-delay-300ms: 300ms;
+  --animation-delay-400ms: 400ms;
+  --animation-delay-500ms: 500ms;
+  --animation-delay-600ms: 600ms;
+  --animation-delay-700ms: 700ms;
+  --animation-delay-800ms: 800ms;
+  --animation-delay-900ms: 900ms;
+  --animation-delay-1000ms: 1000ms;
+
+  @keyframes wavey {
+    0%,
+    100% {
+      transform: scaleY(0.5);
+    }
+    50% {
+      transform: scaleY(1.5);
+    }
+  }
+}
+
+@utility delay-animation-* {
+  animation-delay: --value(--animation-delay- *);
+  /* animation-delay: calc(--value(integer) * 1ms); */
+}
+
+@layer base {
+  body {
+    font-family: var(--font-quicksand);
+  }
+
+  h1 {
+    @apply text-6xl font-bold;
+  }
+
+  h2 {
+    @apply text-5xl font-bold;
+  }
+
+  h3 {
+    @apply text-4xl font-bold;
+  }
+
+  h4 {
+    @apply text-3xl font-bold;
+  }
+
+  h5 {
+    @apply text-2xl font-bold;
+  }
+
+  h6 {
+    @apply text-xl font-bold;
+  }
+}
+
+@layer components {
+  .menu-items {
+    @apply relative flex h-full items-center p-4 cursor-pointer font-bold text-amber-50 hover:text-zinc-200 hover:bg-white/10 transition-colors ease-in-out;
+  }
+}
+
+@custom-variant group-open {
+  &:is(:where(.group):is(.open, [open], :popover-open, :open) *) {
+    @slot;
+  }
+}
+
+@custom-variant peer-open {
+  &:is(:where(.peer):is(.open, [open], :popover-open, :open) ~ *) {
+    @slot;
+  }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
